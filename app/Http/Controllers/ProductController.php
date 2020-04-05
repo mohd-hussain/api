@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Exceptions\ProductNotBelongsToUser;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\Product\ProductCollection;
 use App\Http\Resources\Product\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use Auth;
 
 class ProductController extends Controller
 {
@@ -21,7 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return  ProductCollection::collection(Product::paginate(20));
+        return  ProductCollection::collection(Product::all());
     }
 
     /**
@@ -91,6 +94,8 @@ class ProductController extends Controller
         // return $request->all();
         // return $product;
 
+        $this->ProductUserCheck($product);
+
         $request['detail'] = $request->description;
         unset($request['description']);
 
@@ -110,8 +115,18 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+         $this->ProductUserCheck($product);
+
           $product->delete();
 
           return response(null,204);
+    }
+
+    public function ProductUserCheck($product)
+    {
+        if(Auth::id() !== $product->user_id)
+        {
+            throw new ProductNotBelongsToUser;
+        }
     }
 }

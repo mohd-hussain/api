@@ -14,7 +14,6 @@ class ProductResource extends Resource
      */
     public function toArray($request)
     {
-       
             return [
 
                 'name' => $this->name,
