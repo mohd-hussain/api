@@ -33,4 +33,10 @@ Route::group(['middleware' => ['auth','admin']], function() {
     Route::put('/role-register-update/{id}','Admin\DashboardController@roleRegisterUpdate');
     Route::delete('/role-delete/{id}','Admin\DashboardController@roleDelete');
 
+    Route::get('/products-all','Admin\ProductController@index');
+    Route::post('/store-product','Admin\ProductController@store');
+    Route::get('/edit-product/{id}','Admin\ProductController@edit');
+    Route::put('/update-product/{id}','Admin\ProductController@update');
+    Route::delete('/delete-product/{id}','Admin\ProductController@destroy');
+
 });

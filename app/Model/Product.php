@@ -12,6 +12,10 @@ class Product extends Model
         'name','detail','price','stock','discount'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
     
     public function reviews(){
 

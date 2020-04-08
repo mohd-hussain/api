@@ -57,10 +57,10 @@
               <p>Maps</p>
             </a>
           </li>
-          <li class="{{ 'aboutus' == request()->path() ? 'active' : '' }}">
-            <a href="/aboutus">
+          <li class="{{ 'products-all' == request()->path() ? 'active' : '' }}">
+            <a href="/products-all">
               <i class="now-ui-icons ui-1_bell-53"></i>
-              <p>About Us</p>
+              <p>Products</p>
             </a>
           </li>
         <li class="{{ 'role-register' == request()->path() ? 'active' : '' }}">
