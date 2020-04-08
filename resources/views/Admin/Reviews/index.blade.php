@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    Dashboard: All Products 
+    Dashboard: All Reviews 
 @endsection
 
 @section('content')
@@ -15,30 +15,23 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="/store-product" method="POST" > 
+          <form action="/store-review" method="POST" > 
           
               {{ csrf_field() }}
               <div class="modal-body">
                   <div class="form-group">
-                    <label for="recipient-name" class="col-form-label">Product Name:</label>
-                    <input type="text" name="name" class="form-control" id="recipient-name">
+                    <label for="recipient-name" class="col-form-label">Customer:</label>
+                    <input type="text" name="customer" class="form-control" id="recipient-name">
                   </div>
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Product Detail:</label>
-                    <textarea  name="detail" class="form-control" id="message-text"></textarea>
+                    <label for="message-text" class="col-form-label">Product Review:</label>
+                    <textarea  name="review" class="form-control" id="message-text"></textarea>
                   </div>
                   <div class="form-group">
-                    <label for="message-text" class="col-form-label">Price:</label>
-                    <input type="integer" name="price" class="form-control" id="recipient-name">
+                    <label for="message-text" class="col-form-label">Rating:</label>
+                    <input type="integer" name="star" class="form-control" id="recipient-name">
                   </div>
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Stock:</label>
-                    <input type="integer" name="stock" class="form-control" id="recipient-name">
-                  </div>
-                  <div class="form-group">
-                    <label for="message-text" class="col-form-label">Discount:</label>
-                    <input type="integer" name="discount" class="form-control" id="recipient-name">
-                  </div>
+                  
                 
               </div>
               <div class="modal-footer">
@@ -56,7 +49,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modal Delete</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -86,7 +79,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h4 class="card-title "> Products
+              <h4 class="card-title ">Product & Reviews
               <button type="button" class="btn btn-primary float-right " data-toggle="modal" data-target="#exampleModal" >Add</button>
               </h4>
             </div>
@@ -103,24 +96,20 @@
                   <thead class=" text-primary">
                         <th>Id</th>
                         <th>Name</th>
-                        <th>Detail</th>
-                        <th>Price</th>
-                        <th>Stock</th>
-                        <th>Discount</th>
+                        <th>Review</th>
+                        <th>Rating</th>
                         <th>Edit</th>
                         <th>Delete</th>
                   </thead>
                   <tbody>
-                    @foreach($products as $product)
+                    @foreach($reviews as $review)
                     <tr>
-                        <td><a href="/show-product/{{$product->id}}" class="btn btn-link">{{ $product->id }}</a></td>
-                        <td>{{ $product->name }}</td>
-                        <td>{{ $product->detail }}</td>
-                        <td>{{ $product->price }}</td>
-                        <td>{{ $product->stock }}</td>
-                        <td>{{ $product->discount }}</td>
+                        <td>{{ $review->id }}</td>                
+                        <td>{{ $review->customer }}</td>
+                        <td>{{ $review->review }}</td>
+                        <td>{{ $review->star }}</td> 
                         <td> 
-                            <a href="/edit-product/{{$product->id}}" class="btn btn-success">Edit</a>
+                            <a href="/edit-review/{{$review->id}}" class="btn btn-success">Edit</a>
                         </td>
                         <td> 
                             <a href="javascript:void(0)" class="btn btn-danger deletebtn"  data-toggle="modal" data-target="#deletemodelpop">Delete</a>                                                              
@@ -152,7 +141,7 @@
 
                 $('#delete_aboutus_id').val(data[0]);
 
-                $('#delete_modal_Form').attr('action','delete-product/'+data[0]);
+                $('#delete_modal_Form').attr('action','delete-review/'+data[0]);
 
                 $('#delete_modalpop').modal('show');
             });

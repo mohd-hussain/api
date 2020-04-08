@@ -4,21 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Review;
 use App\Model\Product;
-use App\Http\Resources\Product\ProductCollection;
 
-class ProductController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Product $product)
     {
-        $products = Product::all();
-        // dd($products);
-        return view('Admin.Products.index',compact('products'));
+        $reviews = Review::all();
+        // dd($reviews);
+        return view("Admin.Reviews.index",compact('reviews'));
     }
 
     /**
@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -40,25 +40,19 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|max:255',
-            'detail' => 'required',
-            'price' => 'required',
-            'stock' => 'required',
-            'discount' => 'required',
+            'customer' => 'required',
+            'review' => 'required',
+            'star' =>'required|numeric',
         ]);
-        
-        $product = new Product;
-        $product->name = $request->name;
-        $product->detail = $request->detail;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->discount = $request->discount;
-        $product->user_id = auth()->user()->id;
 
-        $product->save();
-        return redirect('/products-all')->with('success','Your Data is Added For About Us');
-            
-    }
+        $review = new Review;
+        $review->customer = $request->customer;
+        $review->review = $request->review;
+        $review->star = $request->star;
+
+        $review->save();
+        return redirect('/reviews-all')->with('success','Your Review is Added For this Product');
+     }
 
     /**
      * Display the specified resource.
@@ -79,8 +73,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('Admin.Products.edit-product',compact('product'));
+        $review = Review::findOrFail($id);
+
+        return view('Admin.Reviews.edit-review',compact('review'));
     }
 
     /**
@@ -92,11 +87,18 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $product->update($request->all());
+        $review = Review::findOrFail($id);
 
-        return redirect('/products-all')->with('success','Your Data is Updated is Succesfully');
-    }
+        $this->validate($request,[
+            'customer' => 'required',
+            'review' => 'required',
+            'star' =>'required|numeric',
+        ]);
+
+        $review->update($request->all());
+        return redirect('/reviews-all')->with('success','Your Review is Updated');
+     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -106,9 +108,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::findOrFail($id);
-        $product->delete();
+        $review = Review::findOrFail($id);
 
-        return redirect('/products-all')->with('success','Your Data is Deleted Succesfully');
+        $review->delete();
+        return redirect('/reviews-all')->with('success','Your Review is Deleted');
     }
 }

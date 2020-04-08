@@ -9,7 +9,7 @@ class Review extends Model
 {
 
     protected $fillable = [
-        'star','rating','review'
+        'customer','review','star'
     ];
 
     public function product(){

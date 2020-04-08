@@ -39,4 +39,10 @@ Route::group(['middleware' => ['auth','admin']], function() {
     Route::put('/update-product/{id}','Admin\ProductController@update');
     Route::delete('/delete-product/{id}','Admin\ProductController@destroy');
 
+    Route::get('/reviews-all','Admin\ReviewController@index');
+    Route::post('/store-review','Admin\ReviewController@store');  
+    Route::get('/edit-review/{id}','Admin\ReviewController@edit');
+    Route::put('/update-review/{id}','Admin\ReviewController@update');
+    Route::delete('/delete-review/{id}','Admin\ReviewController@destroy');    
+
 });
