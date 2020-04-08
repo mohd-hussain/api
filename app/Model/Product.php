@@ -22,4 +22,9 @@ class Product extends Model
         return $this->hasMany(Review::class);
     }
 
+    // public function getTotalPriceAttribute()
+    // {
+    //     return round((1 - ($this->discount/100)) * $this->price,2);
+    // }
+
 }

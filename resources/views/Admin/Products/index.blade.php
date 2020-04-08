@@ -113,12 +113,13 @@
                   <tbody>
                     @foreach($products as $product)
                     <tr>
-                        <td><a href="/show-product/{{$product->id}}" class="btn btn-link">{{ $product->id }}</a></td>
+                        <!-- <td><a href="/show-product/{{$product->id}}" class="btn btn-link">{{ $product->id }}</a></td> -->
+                        <td>{{ $product->id }}</td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->detail }}</td>
                         <td>{{ $product->price }}</td>
                         <td>{{ $product->stock }}</td>
-                        <td>{{ $product->discount }}</td>
+                        <td>{{ $product->discount }}%</td>
                         <td> 
                             <a href="/edit-product/{{$product->id}}" class="btn btn-success">Edit</a>
                         </td>
