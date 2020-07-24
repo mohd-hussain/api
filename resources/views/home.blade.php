@@ -7,6 +7,8 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
+
+
                 <div class="panel-body">
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -15,6 +17,14 @@
                     @endif
 
                     You are logged in!
+
+                    <p><a class="btn btn-primary btn-lg mt-5" id="logout-form" href="{{ route('logout') }}" 
+                    onclick="event.preventDefault();
+                                         document.getElementById('logout-form').submit();"
+                                                    role="button">LogOut</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                    </form>
                 </div>
             </div>
         </div>

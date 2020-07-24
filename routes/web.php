@@ -11,6 +11,11 @@
 |
 */
 
+// use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Route;
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,6 +23,9 @@ Route::get('/', function () {
 // Route::get('/dashboard', function(){ 
 //     return view('Admin.dashboard');
 // });
+
+// Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
+// Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 Auth::routes();
 
@@ -46,3 +54,9 @@ Route::group(['middleware' => ['auth','admin']], function() {
     Route::delete('/delete-review/{id}','Admin\ReviewController@destroy');    
 
 });
+
+
+
+
+
+

@@ -144,7 +144,7 @@
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
+                            {{ csrf_field() }}
                         </form>
                     </div>
                 </li>
@@ -188,17 +188,17 @@
           <nav>
             <ul>
               <li>
-                <a href="https://www.creative-tim.com">
+                <a href="#">
                   Creative Tim
                 </a>
               </li>
               <li>
-                <a href="http://presentation.creative-tim.com">
+                <a href="#">
                   About Us
                 </a>
               </li>
               <li>
-                <a href="http://blog.creative-tim.com">
+                <a href="#">
                   Blog
                 </a>
               </li>
@@ -209,8 +209,8 @@
             <script>
               document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
             </script>, Designed by
-            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+            <a href="#" target="_blank">Invision</a>. Coded by
+            <a href="#" target="_blank">Creative Tim</a>.
           </div>
         </div>
       </footer>

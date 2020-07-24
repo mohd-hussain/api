@@ -15,7 +15,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form action="/store-product" method="POST" > 
+          <form action="/store-product" method="POST" enctype="multipart/form-data"> 
           
               {{ csrf_field() }}
               <div class="modal-body">
@@ -39,6 +39,10 @@
                     <label for="message-text" class="col-form-label">Discount:</label>
                     <input type="integer" name="discount" class="form-control" id="recipient-name">
                   </div>
+                  <!-- <div class="form-group">
+                    <label for="message-text" class="col-form-label">Product Image:</label>
+                    <input type="file" name="product_image" class="form-control" id="recipient-name">
+                  </div> -->
                 
               </div>
               <div class="modal-footer">
@@ -56,7 +60,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Review;
 use App\Model\Product;
+use Auth;
 
 class ReviewController extends Controller
 {
@@ -15,7 +16,8 @@ class ReviewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Product $product)
-    {
+    {   
+        
         $reviews = Review::all();
         // dd($reviews);
         return view("Admin.Reviews.index",compact('reviews'));
@@ -49,6 +51,7 @@ class ReviewController extends Controller
         $review->customer = $request->customer;
         $review->review = $request->review;
         $review->star = $request->star;
+        // $review->product_id = reviews()->product()->id;
 
         $review->save();
         return redirect('/reviews-all')->with('success','Your Review is Added For this Product');
