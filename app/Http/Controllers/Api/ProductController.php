@@ -46,12 +46,29 @@ class ProductController extends Controller
      */
     public function store(ProductRequest $request)
     {
+        if($request->hasFile('product_image')){
+                //Get filename with the extension
+                $filenameWithExt = $request->file('product_image')->getClientOriginalName();
+                //Get Just filename
+                $filename = pathinfo($filenameWithExt,PATHINFO_FILENAME);
+                //Get just Ext
+                $extention = $request->file('product_image')->getClientOriginalExtension();
+                //Filename to store
+                $fileNameToStore = $filename.'_'.time().'.'.$extention;
+                //Upload Image
+                $path = $request->file('product_image')->storeAs('public/product_image',$fileNameToStore);
+            }else{
+                $fileNameToStore = 'noimage.jpg';
+        }
+
         $product = new Product;
         $product->name = $request->name;
+        $product->product_image = $fileNameToStore;
         $product->detail = $request->description;
         $product->price = $request->price;
         $product->stock = $request->stock;
         $product->discount = $request->discount;
+        $product->user_id = auth()->user()->id;
 
         $product->save();
         return response(
